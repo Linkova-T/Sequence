@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <vector>
 #include <random>
+#include <iterator>
+#include <algorithm>
 
 
 int getRandomNumber(int min, int max)
@@ -22,10 +24,23 @@ int getRandomNumber(int min, int max)
 	}
 
 int main() {
+//generating of random vector
 	std::vector<int> sequence;
+	std::vector <int>::iterator Iter;
 	generatingSequence(sequence);
-	for (int i = 0; i < 10; i++)
-	{
-		std::cout << sequence[i] << "\n";
-	};
+	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
+		std::cout << *Iter << " ";
+	std::cout << "\n";
+//adding elements from cin
+	std::copy(std::istream_iterator<int>(std::cin), std::istream_iterator<int>(), std::back_inserter(sequence));
+	std::cin.clear();
+	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
+		std::cout << *Iter << " ";
+	std::cout << "\n";
+//random shuffle of vector
+	std::random_shuffle(sequence.begin(), sequence.end());
+	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
+		std::cout << *Iter << " ";
+	std::cout << "\n";
+
 }
