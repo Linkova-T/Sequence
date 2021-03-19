@@ -15,9 +15,9 @@ int getRandomNumber(int min, int max)
 };
 
 
-	void generatingSequence(std::vector<int>&vectorForRand) {
+	void generatingSequence(std::vector<int>&vectorForRand, int n) {
 		srand(static_cast<unsigned int>(time(0)));
-		for (int count = 0; count < 10; ++count)
+		for (int count = 0; count < n; ++count)
 		{
 			vectorForRand.push_back(getRandomNumber(1,10));
 		};
@@ -27,7 +27,7 @@ int main() {
 //generating of random vector
 	std::vector<int> sequence;
 	std::vector <int>::iterator Iter;
-	generatingSequence(sequence);
+	generatingSequence(sequence,10);
 	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
 		std::cout << *Iter << " ";
 	std::cout << "\n";
@@ -42,5 +42,68 @@ int main() {
 	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
 		std::cout << *Iter << " ";
 	std::cout << "\n";
-
+//delete duplicates
+	std::sort(sequence.begin(), sequence.end());
+	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
+		std::cout << *Iter << " ";
+	std::cout << "\n";
+	sequence.erase(std::unique(sequence.begin(), sequence.end()), sequence.end());
+	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
+		std::cout << *Iter << " ";
+	std::cout << "\n";
+//
+	int amount = 0;
+	for (int i = 0; i < sequence.size(); i++) {
+		if (sequence[i] % 2 != 0)
+			amount = amount+1;
+	}
+	std::cout << amount;
+	std::cout << "\n";
+// min and max elements
+	std::vector<int>::const_iterator it; // объявляем итератор
+	it = min_element(sequence.begin(), sequence.end());
+	std::cout << "min = " << *it << ' ';
+	it = max_element(sequence.begin(), sequence.end());
+	std::cout << "max = " << *it << ' ';
+	std::cout << '\n';
+//
+	
+	for (int j = 0; j < sequence.size(); j++) {
+		bool isPrime = true;
+		for (int i = 2; i <= (sqrt(abs(sequence[j]))); i++) {
+			if (sequence[j] % i == 0) {
+				isPrime = false;
+				break;
+			}
+		}
+		if (isPrime) {
+			std::cout << "Prime = "<< sequence[j] << " ";
+		}
+	}
+	std::cout << '\n';
+//sqr
+	class functorType2 {
+	public:
+		int operator()(int i) {
+			return i*i;
+		}
+	};
+	functorType2 functorObj;
+	std::transform(sequence.begin(), sequence.end(), sequence.begin(), functorObj);
+	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
+		std::cout << *Iter << " ";
+	std::cout << "\n";
+//generating new vector
+	std::vector<int> vect;
+	std::vector <int>::iterator It;
+	generatingSequence(vect, sequence.size());
+	for (It = vect.begin(); It != vect.end(); It++)
+		std::cout << *It << " ";
+	std::cout << "\n";
+//sum 
+	int sum = 0;
+	for (It = vect.begin(); It != vect.end(); It++)
+		sum = sum + *It;
+	std::cout << "sum = " << sum << "\n";
+	//int sum = std::accumulate(vect.begin(), vect.end());
 }
