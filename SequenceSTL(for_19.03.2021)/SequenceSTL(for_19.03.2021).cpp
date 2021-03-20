@@ -66,7 +66,7 @@ int main() {
 	it = max_element(sequence.begin(), sequence.end());
 	std::cout << "max = " << *it << ' ';
 	std::cout << '\n';
-//
+//Prime
 	
 	for (int j = 0; j < sequence.size(); j++) {
 		bool isPrime = true;
@@ -90,15 +90,13 @@ int main() {
 	};
 	functorType2 functorObj;
 	std::transform(sequence.begin(), sequence.end(), sequence.begin(), functorObj);
-	for (Iter = sequence.begin(); Iter != sequence.end(); Iter++)
-		std::cout << *Iter << " ";
+	std::copy(sequence.begin(), sequence.end(), std::ostream_iterator<int>(std::cout, " "));
 	std::cout << "\n";
 //generating new vector
 	std::vector<int> vect;
 	std::vector <int>::iterator It;
 	generatingSequence(vect, sequence.size());
-	for (It = vect.begin(); It != vect.end(); It++)
-		std::cout << *It << " ";
+	std::copy(vect.begin(), vect.end(), std::ostream_iterator<int>(std::cout, " "));
 	std::cout << "\n";
 //sum 
 	int sum = 0;
@@ -106,4 +104,35 @@ int main() {
 		sum = sum + *It;
 	std::cout << "sum = " << sum << "\n";
 	//int sum = std::accumulate(vect.begin(), vect.end());
+//replacement
+	for (It = vect.begin(); It != vect.begin() + 2; It++)
+		*It = 1;
+	std::copy(vect.begin(), vect.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n";
+//difference
+	std::vector<int> arr;
+	std::vector<int>::iterator iter;
+	arr.reserve(vect.size());
+	/*for (iter = arr.begin(); iter != arr.end(); iter++)
+	{
+		*iter = 
+	}*/
+	for (int m = 0; m < vect.size(); m++)
+	{
+		arr.push_back((sequence[m] - vect[m]));
+	}
+	std::copy(arr.begin(), arr.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n";
+// -n -> 0
+	/*for (iter = arr.begin(); iter != arr.begin() + 3; iter++) {
+			*iter = -3;
+	}*/
+	arr[4] = -1;
+	for (iter = arr.begin(); iter != arr.end(); iter++) {
+		if (*iter < 0)
+			*iter = 0;
+	}
+	std::copy(arr.begin(), arr.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n";
+
 }
