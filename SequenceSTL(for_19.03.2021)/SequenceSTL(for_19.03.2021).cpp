@@ -134,5 +134,26 @@ int main() {
 	}
 	std::copy(arr.begin(), arr.end(), std::ostream_iterator<int>(std::cout, " "));
 	std::cout << "\n";
-
+//reverce
+	std::reverse(arr.begin(), arr.end());
+	std::copy(arr.begin(), arr.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n";
+//sort
+	std::sort(vect.begin(), vect.end());
+	std::sort(sequence.begin(), sequence.end());
+	std::cout << "sequence: "; 
+	std::copy(sequence.begin(), sequence.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n"<< "vect: ";
+	std::copy(vect.begin(), vect.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n";
+//merge
+	std::vector<int> finalvect;
+	finalvect.reserve(vect.size() + sequence.size());
+	std::copy(sequence.begin(), sequence.end(), back_inserter(finalvect));
+	std::copy(vect.begin(), vect.end(), back_inserter(finalvect));
+	std::cout << "finalvect: ";
+	std::copy(finalvect.begin(), finalvect.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "\n";
+	std::cout << "arr: ";
+	std::copy(arr.begin(), arr.end(), std::ostream_iterator<int>(std::cout, " "));
 }
